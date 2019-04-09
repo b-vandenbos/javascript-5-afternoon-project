@@ -13,7 +13,10 @@
   The values for the make and model will come from two parameters, make and model (in that order).
 */
 
-// Code here
+function CarFactory(make, model) {
+    this.make = make;
+    this.model = model;
+}
 
 
 
@@ -32,7 +35,7 @@ function Employee(name, email, hireDate, salary) {
   Assign the result of the invocation to a variable called bob.
 */
 
-// Code here
+let bob = new Employee('Bob', 'bob@gmail.com', '01-02-98');
 
 
 
@@ -53,23 +56,47 @@ mustang.moveCar(); // Increments mustang' move property by 10. Returns the new m
   You'll also need to use the 'this' keyword properly in order to make sure you're invoking moveCar on the right object (prius vs mustang).
 */
 
-// Code here
+function Car(make, model, year) {
+  this.make;
+  this.model;
+  this.year;
+  this.move = 0;
+  this.moveCar = function() {
+    this.move = this.move = 10;
+    return this.move;
+  }
+}
 
 
 ////////// PROBLEM 4 ////////// 	
 
 
- // Here we have a constructor function named Movie that takes in 3 parameters: name (a string), genre (a string), and rating (a number withing 1-100 that has been averaged out from previous given ratings). Write a prototype method for the Movie constructor function called changeRating. This method should take in a number as a parameter that will be a new rating. Find the average between the old rating and the new rating. Change the rating property to become this new number and return the updated rating. 	
+ // Here we have a constructor function named Movie that takes in 3 parameters: name (a string), genre (a string), and rating (a number withing 1-100 that has been averaged out from previous given ratings).
+ //Write a prototype method for the Movie constructor function called changeRating. This method should take in a number as a parameter that will be a new rating.
+ // Find the average between the old rating and the new rating. Change the rating property to become this new number and return the updated rating. 	
 
 
  function Movie(name, genre, rating) {	
   this.name = name;	
   this.genre = genre;	
-  this.rating = rating;	
-}	
+  this.rating = rating;
+  
+  }
+  
+Movie.prototype.method = function changeRating(newRating) {
+  this.rating = (this.rating + newRating) / 2;
+  return this.rating;
+}
 
+Movie.prototype.changeRating = function(rating) {
+  this.rating = (this.rating + rating) / 2;
+  return this.rating;
+}
 
- // Code here	
+var movie1 = new Movie('Captain Marvel', 'action', 10);
+console.log(movie1);
+movie1.changeRating(0);
+console.log(movie1);
 
 
 
@@ -82,7 +109,33 @@ mustang.moveCar(); // Increments mustang' move property by 10. Returns the new m
  // Once the User constructor function is created, write a prototype method for the User function. Name this method addSavedPost. It should take in three parameters: id (a number), title (a string) and rating (a number). Use these parameters to create a new object and add it to the savedPosts array. Make sure to name the properties the same as described previously (id, title, rating).	
 
 
- // Code here	
+ function User(name, age, email, savedPosts) {
+   this.name = name;
+   this.age = age;
+   this.email = email;
+   this.savedPosts = savedPosts;
+ }
+
+ User.prototype.addSavedPost = function(id, title, rating) {
+   let newPost = {id: id, title: title, rating: rating};
+   this.savedPosts.push(newPost);
+   return this.savedPosts;
+ }
+
+ User.prototype.removeSavedPost = function(id) {
+   let removedPost = this.savedPosts.indexOf(post => post.id = id);
+   this.savedPosts.splice(removedPost, 1);
+ }
+
+ User.prototype.changePostRating = function(id, newRating) {
+   let postToUpdate = this.savedPosts.find(post => post.id === id);
+   postToUpdate.rating = newRating;   
+ }
+
+
+
+
+
 
 
 
